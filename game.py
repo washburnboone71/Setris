@@ -1,10 +1,19 @@
 import pygame
+from util_params import *
+from background import *
+from start_screen import *
+
+game_started = False
 
 # pygame setup
 pygame.init()
-screen = pygame.display.set_mode((1280, 720))
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
 clock = pygame.time.Clock()
 running = True
+
+# make background
+First_background = start_screen()
+Second_background = make_background()
 
 while running:
     # poll for events
@@ -13,10 +22,18 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
-    # fill the screen with a color to wipe away anything from last frame
-    screen.fill("purple")
-
     # RENDER YOUR GAME HERE
+    if event.type == pygame.KEYUP:
+
+        if event.key == pygame.K_RETURN: #k_return is = to enter
+            
+            game_started = True
+    
+    #use game state to determine screen
+    if game_started:
+        screen.blit(Second_background, (0,0))
+    else:
+        screen.blit(First_background, (0,0))
 
     # flip() the display to put your work on screen
     pygame.display.flip()
