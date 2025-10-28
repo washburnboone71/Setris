@@ -54,5 +54,3 @@ def start_screen_question_selected():
 
     #return the backgorund
     return background
-
-    
