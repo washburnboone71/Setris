@@ -43,7 +43,6 @@ def make_background():
     pygame.draw.line(background, (SURFACE_COLOR), (15,15), (15, 685), 2)
 
     
-    
             
     # return the background surface
     return background
