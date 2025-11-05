@@ -8,7 +8,7 @@ from util_params import*
 class Levelcounter:
 
     def __init__(self, font_path, font_size, color, start_position):
-        self.count = 0 #initial level
+        self.count = 1 #initial level
         self.color = color
         self.position = start_position
         self.font = pygame.font.Font(font_path, font_size)

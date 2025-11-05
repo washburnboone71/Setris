@@ -5,6 +5,7 @@ from start_screen import *
 from random import randint
 from how_to_play import *
 from Levelcounter import *
+from shapes import *
 # pygame setup
 pygame.init()
 
@@ -54,7 +55,7 @@ TRIGGER_AREA_QUESTION_X = pygame.Rect(900, 50, 100, 100)
 level_display = Levelcounter('ka1.ttf', 50, (255,255,255), (905, 615))
 
 while running:
-
+    
     # pygame.QUIT event means the user clicked X to close your window
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -79,11 +80,12 @@ while running:
     is_hovering_question = TRIGGER_AREA_QUESTION.collidepoint(mouse_x, mouse_y)
     is_hovering_question_X = TRIGGER_AREA_QUESTION_X.collidepoint(mouse_x, mouse_y)
     
-
+    is_carried = False
 
     if game_started:
         screen.blit(Second_background, (0,0))
         level_display.blit(screen)
+        
 
     elif is_showing_help:
         screen.blit(how_to_play_background, (0,0))
@@ -111,7 +113,9 @@ while running:
             
         else:
             screen.blit(First_background, (0, 0))
-            
+    
+
+    
 
     # flip() the display to put your work on screen
     pygame.display.flip()
