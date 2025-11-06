@@ -4,8 +4,9 @@ from background import *
 from start_screen import *
 from random import randint
 from how_to_play import *
-from Levelcounter import *
+from levelandtimer import *
 from shapes import *
+import time
 # pygame setup
 pygame.init()
 
@@ -52,7 +53,7 @@ TRIGGER_AREA_QUESTION = pygame.Rect(800, 475, 150, HEIGHT // 4)
 TRIGGER_AREA_QUESTION_X = pygame.Rect(900, 50, 100, 100)
 
 #create instance of the level
-level_display = Levelcounter('ka1.ttf', 50, (255,255,255), (905, 615))
+level_timer_display = Levelcounter('ka1.ttf', 32, (255,255,255), (915, 625), (765,625))
 
 while running:
     
@@ -84,7 +85,9 @@ while running:
 
     if game_started:
         screen.blit(Second_background, (0,0))
-        level_display.blit(screen)
+        level_timer_display.timer()
+        level_timer_display.blit(screen)
+            
         
 
     elif is_showing_help:

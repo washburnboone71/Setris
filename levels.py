@@ -4,7 +4,7 @@ from background import *
 from start_screen import *
 from random import randint
 from how_to_play import *
-from Levelcounter import *
+from levelandtimer import *
 from shapes import *
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -20,5 +20,7 @@ class Level:
 
     def blit_shape_to_make(self):
 
+
+#not finished yet
 #make the shape to make a png(i can easily just draw all three)
 #make shapes 
