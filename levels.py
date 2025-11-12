@@ -20,6 +20,8 @@ class Level:
 
     def blit_shape_to_make(self):
 
+    def blit_shapes(self):
+        #make it a long if chain where if theres three shapes in the list of shapes it blits [0] in this specific place [1] in the place... make it a for loop though and then the next if loop will be for if there is 4 in the list of shapes
 
 #not finished yet
 #make the shape to make a png(i can easily just draw all three)

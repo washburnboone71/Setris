@@ -52,8 +52,7 @@ TRIGGER_AREA_PLAY = pygame.Rect(0, 475, WIDTH // 4, HEIGHT // 4)
 TRIGGER_AREA_QUESTION = pygame.Rect(800, 475, 150, HEIGHT // 4)
 TRIGGER_AREA_QUESTION_X = pygame.Rect(900, 50, 100, 100)
 
-#create instance of the level
-level_timer_display = Levelcounter('ka1.ttf', 32, (255,255,255), (915, 625), (765,625))
+level_timer_display = Levelcounter('ka1.ttf', 32, (255,255,255), (915, 625), (740,625))
 
 while running:
     
@@ -68,6 +67,9 @@ while running:
         #if enter is pressed start the game
         if event.key == pygame.K_RETURN: #k_return is = to enter
             game_started = True
+
+            if not level_timer_display.has_started:
+                level_timer_display.start_timer()
 
 
         #if escape is pressed while on the how to play screen go back to orignal start screen
@@ -85,8 +87,13 @@ while running:
 
     if game_started:
         screen.blit(Second_background, (0,0))
-        level_timer_display.timer()
-        level_timer_display.blit(screen)
+        
+        if not level_timer_display.has_started: 
+            level_timer_display.start_timer()
+
+        level_timer_display.blit_both(screen)
+        
+
             
         
 
@@ -104,6 +111,9 @@ while running:
             if event.type == pygame.MOUSEBUTTONUP:
                 game_started = True
                 click_sound.play()
+                
+                if not level_timer_display.has_started:
+                    level_timer_display.start_timer()
 
         elif is_hovering_question:
             screen.blit(question_background, (0,0))

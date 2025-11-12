@@ -1,2 +1,15 @@
-square_piece = 'square_peice.png'
+import pygame
+
+L_Shape= [[[1,0],[1,0],[1,1]], (255, 165, 0)] #orange
+
+T_Shape= [[[1,0],[1,1],[1,0]], (230,230,250)] #purple
+
+I_Shape= [[[1,0],[1,0],[1,0]], (255,0,0)] #red
+
+S_Shape= [[[1,0],[1,1],[0,1]], (0,255,0)] #green
+
+Square_Shape= [[[1,1],[1,1]], (255,255,0)] #yellow
+
+Small_L_Shape= [[[1,0],[1,1]], (255,200,200)] #pink
+
 
