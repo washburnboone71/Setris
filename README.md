@@ -1,4 +1,11 @@
-1) Add a start screen
-2) make shapes to use in game
-3) make time and level methods
-4) start crafting first level
+## AY26 Setris Game
+
+
+### Title Screen 
+![screenshot](Screenshot1.png)
+![screenshot](Screenshot2.png)
+
+## Directions
+1. Press 'enter' to start play or press the 'play' button
+2. Press '?' to see the how to play screen
+
