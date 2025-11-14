@@ -2,8 +2,8 @@
 
 
 ### Title Screen 
-![screenshot](Screenshot1.png)
-![screenshot](Screenshot2.png)
+![screenshot](Documents\GitHub\Setris\Screenshot1.png)
+![screenshot](Documents\GitHub\Setris\Screenshot2.png)
 
 ## Directions
 1. Press 'enter' to start play or press the 'play' button
