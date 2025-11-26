@@ -5,8 +5,10 @@ from start_screen import *
 from random import randint
 from how_to_play import *
 from levelandtimer import *
-from shapes import *
-import time
+from shape import *
+from levels import *
+from time import *
+
 # pygame setup
 pygame.init()
 
@@ -36,6 +38,36 @@ game_started = False
 # is showing help screen is set to show when you click '?'
 is_showing_help = False
 
+#current level
+current_level_index = 0 
+current_level = None
+
+def load_level(index):
+    data = get_level_data(index)
+    try:
+        if data:
+            return Level(data['target_image'], data['pieces'])
+        return None 
+    except:
+        print("Error loading images")
+
+
+def advance_level():
+    global current_level_index, current_level, game_started
+    current_level_index +=1
+
+    new_level = load_level(current_level_index)
+    if new_level:
+        current_level = new_level
+        print(f'Loading Level {current_level_index +1}')
+    else:
+        game_started = False
+        print("Game Finished!")
+        """PUT GAME OVERSCREEN HERE"""
+
+        current_level = load_level(current_level_index)
+
+current_level = load_level(current_level_index)
 
 # background items
 First_background = start_screen()
@@ -50,10 +82,11 @@ how_to_play_X_background = how_to_play_X()
 FULLSCREEN = pygame.Rect(0, 0, WIDTH, HEIGHT)
 TRIGGER_AREA_PLAY = pygame.Rect(0, 475, WIDTH // 4, HEIGHT // 4)
 TRIGGER_AREA_QUESTION = pygame.Rect(800, 475, 150, HEIGHT // 4)
-TRIGGER_AREA_QUESTION_X = pygame.Rect(800, 50, 100, 100)
+TRIGGER_AREA_QUESTION_X = pygame.Rect(800, 0, 100, 100)
 
 level_timer_display = Levelcounter('ka1.ttf', 32, (255,255,255), (915, 625), (740,625))
 
+#GAME LOOP
 while running:
     
     # pygame.QUIT event means the user clicked X to close your window
@@ -61,20 +94,21 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
-    # RENDER YOUR GAME HERE
-    if event.type == pygame.KEYUP:
+        if game_started and current_level:
+            current_level.handle_event(event)
+
+        if event.type == pygame.KEYUP:
 
         #if enter is pressed start the game
-        if event.key == pygame.K_RETURN: #k_return is = to enter
-            game_started = True
+            if event.key == pygame.K_RETURN and not game_started: #k_return is = to enter
+                game_started = True
+                if not level_timer_display.has_started:
+                    level_timer_display.start_timer()
 
-            if not level_timer_display.has_started:
-                level_timer_display.start_timer()
 
-
-        #if escape is pressed while on the how to play screen go back to orignal start screen
-        if event.key == pygame.K_ESCAPE and is_showing_help:
-            is_showing_help = False
+            #if escape is pressed while on the how to play screen go back to orignal start screen
+            if event.key == pygame.K_ESCAPE and is_showing_help:
+                is_showing_help = False
 
     
     #declare requirements for hovering a button
@@ -83,16 +117,20 @@ while running:
     is_hovering_question = TRIGGER_AREA_QUESTION.collidepoint(mouse_x, mouse_y)
     is_hovering_question_X = TRIGGER_AREA_QUESTION_X.collidepoint(mouse_x, mouse_y)
     
-    is_carried = False
+    
 
     if game_started:
         screen.blit(Second_background, (0,0))
+
+        current_level.draw(screen)
         
         if not level_timer_display.has_started: 
             level_timer_display.start_timer()
 
         level_timer_display.blit_both(screen)
         
+        if current_level.is_completed:
+            advance_level()
 
             
         
