@@ -126,9 +126,33 @@ def get_level_data(level_index):
                 "correct_grid": [(5, 5)]},
                 {"path": "I_Shape.png",
                 "initial_pos_offset": (0, 2),
-                "correct_grid": [(7, 6)]}
+                "correct_grid": [(7, 6)]}]},
+        #level 3
+            {"target_image": "Level_Three.png",
+               "pieces": 
+               [{"path": "L_Shape.png",
+                "initial_pos_offset": (0, 0),
+                "correct_grid": [(2, 2)]},
+                {"path": "L_Shape.png",
+                "initial_pos_offset": (1, 0),
+                "correct_grid": [(4, 2)]},
+                {"path": "Small_L_Shape.png",
+                "initial_pos_offset": (0, 1),
+                "correct_grid": [(3, 2)]},
+                {"path": "Square_Shape.png",
+                "initial_pos_offset": (1, 1),
+                "correct_grid": [(2, 5)]},
+                {"path": "T_Shape.png",
+                "initial_pos_offset": (0, 2),
+                "correct_grid": [(4, 4)]},
+                {"path": "Square_Shape.png",
+                "initial_pos_offset": (1, 2),
+                "correct_grid": [(5, 6)]}]}
             
-                ]}
+
+
+
+
                 ]
     
     if 0 <= level_index < len(LEVELS):
