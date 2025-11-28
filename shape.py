@@ -11,7 +11,8 @@ class IndexShape:
         self.index_scale_factor = index_scale_factor
 
         self.current_scale = index_scale_factor
-        self._update_image_size()
+        self.rotation_angle = 0
+        self.update_image()
 
         self.rect = self.image.get_rect(topleft=initial_pos)
         self.original_pos = initial_pos
@@ -25,22 +26,26 @@ class IndexShape:
 
 
 
-    def _update_image_size(self):
-        """Helper method to resize the image based on current scale"""
+    def update_image(self):
         new_width = int(self.original_image.get_width() * self.current_scale)
         new_height = int(self.original_image.get_height() * self.current_scale)
-        self.image = pygame.transform.scale(self.original_image, (new_width, new_height))
+        scaled_image = pygame.transform.scale(self.original_image, (new_width, new_height))
+        self.image = pygame.transform.rotate(scaled_image, self.rotation_angle)
 
-    def _resize_piece(self, new_scale):
-        """Resize the piece and adjust position to keep it centered"""
-        # Store the center position
+    def resize_piece(self, new_scale):
+        #store the center position
         center = self.rect.center
         
-        # Update scale and image
+        #update scale and image
         self.current_scale = new_scale
-        self._update_image_size()
-        
-        # Update rect with new image, keeping the center position
+        self.update_image()
+       
+        self.rect = self.image.get_rect(center=center)
+
+    def rotate(self):
+        center = self.rect.center
+        self.rotation_angle = (self.rotation_angle - 90) % 360
+        self.update_image()
         self.rect = self.image.get_rect(center=center)
 
     #drag and dropping pieces
@@ -51,7 +56,7 @@ class IndexShape:
             #grabing piece
             if self.rect.collidepoint(event.pos) and not self.is_placed:
                 self.is_dragging = True
-                self._resize_piece(self.scale_factor)
+                self.resize_piece(self.scale_factor)
                 # calc offset from clicked point
                 self.offset_x = self.rect.x - event.pos[0]
                 self.offset_y = self.rect.y - event.pos[1]
@@ -69,7 +74,7 @@ class IndexShape:
                     self.rect.topleft = snapped_pos
                 else:
                     #if dropped outside go to orignal position
-                    self._resize_piece(self.index_scale_factor)
+                    self.resize_piece(self.index_scale_factor)
                     self.rect.topleft = self.original_pos
 
         #dragging            
@@ -79,6 +84,12 @@ class IndexShape:
                 self.rect.x = event.pos[0] + self.offset_x
                 self.rect.y = event.pos[1] + self.offset_y
 
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_r and self.is_dragging:
+                self.rotate()
+                #calc offset after roation
+                self.offset_x = self.rect.x - pygame.mouse.get_pos()[0]
+                self.offset_y = self.rect.y - pygame.mouse.get_pos()[1]
 
 
     #snaps piece to nearest grid cell
