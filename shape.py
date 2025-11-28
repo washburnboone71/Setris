@@ -4,14 +4,15 @@ from util_params import *
 class IndexShape:
     
     
-    def __init__(self, image_path, initial_pos, correct_grid_coords, scale_factor = 1):
+    def __init__(self, image_path, initial_pos, correct_grid_coords, scale_factor, index_scale_factor):
        
         self.original_image = pygame.image.load(image_path).convert_alpha()
         self.scale_factor = scale_factor
-        new_width = int(self.original_image.get_width() * scale_factor)
-        new_height = int(self.original_image.get_height() * scale_factor)
+        self.index_scale_factor = index_scale_factor
 
-        self.image = pygame.transform.scale(self.original_image, (new_width, new_height))
+        self.current_scale = index_scale_factor
+        self._update_image_size()
+
         self.rect = self.image.get_rect(topleft=initial_pos)
         self.original_pos = initial_pos
         self.is_dragging = False
@@ -23,6 +24,25 @@ class IndexShape:
         self.offset_y = 0
 
 
+
+    def _update_image_size(self):
+        """Helper method to resize the image based on current scale"""
+        new_width = int(self.original_image.get_width() * self.current_scale)
+        new_height = int(self.original_image.get_height() * self.current_scale)
+        self.image = pygame.transform.scale(self.original_image, (new_width, new_height))
+
+    def _resize_piece(self, new_scale):
+        """Resize the piece and adjust position to keep it centered"""
+        # Store the center position
+        center = self.rect.center
+        
+        # Update scale and image
+        self.current_scale = new_scale
+        self._update_image_size()
+        
+        # Update rect with new image, keeping the center position
+        self.rect = self.image.get_rect(center=center)
+
     #drag and dropping pieces
     def handle_event(self, event):      
         #if mouse is down 
@@ -31,6 +51,7 @@ class IndexShape:
             #grabing piece
             if self.rect.collidepoint(event.pos) and not self.is_placed:
                 self.is_dragging = True
+                self._resize_piece(self.scale_factor)
                 # calc offset from clicked point
                 self.offset_x = self.rect.x - event.pos[0]
                 self.offset_y = self.rect.y - event.pos[1]
@@ -48,6 +69,7 @@ class IndexShape:
                     self.rect.topleft = snapped_pos
                 else:
                     #if dropped outside go to orignal position
+                    self._resize_piece(self.index_scale_factor)
                     self.rect.topleft = self.original_pos
 
         #dragging            

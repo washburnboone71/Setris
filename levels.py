@@ -45,7 +45,8 @@ class Level:
                 image_path=data['path'],
                 initial_pos=piece_pos,
                 correct_grid_coords=data['correct_grid'],
-                scale_factor=14
+                scale_factor=14,
+                index_scale_factor = 7
             )
             self.pieces.append(shape)
         
