@@ -46,4 +46,11 @@ def make_background():
             
     # return the background surface
     return background
+def game_over():
+    background = pygame.Surface((WIDTH,HEIGHT))
+    game_over_location = 'Game_Over.png'
+    game_over_image = pygame.image.load(game_over_location).convert_alpha()
+    scaled_game_over_screen = pygame.transform.scale(game_over_image, (WIDTH, HEIGHT))
 
+    background.blit(scaled_game_over_screen, (0,0))
+    return background

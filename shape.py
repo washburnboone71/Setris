@@ -24,7 +24,7 @@ class IndexShape:
 
 
     #drag and dropping pieces
-    def handle_event(self, event):
+    def handle_event(self, event):      
         #if mouse is down 
         if event.type == pygame.MOUSEBUTTONDOWN:
             #if mouse is on piece

@@ -37,6 +37,18 @@ running = True
 game_started = False
 # is showing help screen is set to show when you click '?'
 is_showing_help = False
+game_over_state = False
+
+
+
+# background items
+First_background = start_screen()
+Second_background = make_background()
+play_background = start_screen_play_selected()
+question_background = start_screen_question_selected()
+how_to_play_background = how_to_play()
+how_to_play_X_background = how_to_play_X()
+Game_Over = game_over()
 
 #current level
 current_level_index = 0 
@@ -53,30 +65,25 @@ def load_level(index):
 
 
 def advance_level():
-    global current_level_index, current_level, game_started
+    global current_level_index, current_level, game_started, game_over_state
     current_level_index +=1
+
+    level_timer_display.increment_level()
 
     new_level = load_level(current_level_index)
     if new_level:
         current_level = new_level
         print(f'Loading Level {current_level_index +1}')
     else:
+        game_over_state = True
         game_started = False
         print("Game Finished!")
-        """PUT GAME OVERSCREEN HERE"""
+        return game_over_state
+      
 
-        current_level = load_level(current_level_index)
-
+        
+        
 current_level = load_level(current_level_index)
-
-# background items
-First_background = start_screen()
-Second_background = make_background()
-play_background = start_screen_play_selected()
-question_background = start_screen_question_selected()
-how_to_play_background = how_to_play()
-how_to_play_X_background = how_to_play_X()
-
 
 #declare areas for on screen buttons
 FULLSCREEN = pygame.Rect(0, 0, WIDTH, HEIGHT)
@@ -94,10 +101,17 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
-        if game_started and current_level:
+        if game_started and current_level and not game_over_state:
             current_level.handle_event(event)
 
         if event.type == pygame.KEYUP:
+            if game_over_state and event.key != pygame.K_ESCAPE:
+                game_over_state = False
+                game_started = False
+                current_level_index = 0
+                current_level = load_level(current_level_index)
+                level_timer_display = Levelcounter('ka1.ttf', 32, (255,255,255), (915, 625), (740,625))
+
 
         #if enter is pressed start the game
             if event.key == pygame.K_RETURN and not game_started: #k_return is = to enter
@@ -118,6 +132,8 @@ while running:
     is_hovering_question_X = TRIGGER_AREA_QUESTION_X.collidepoint(mouse_x, mouse_y)
     
     
+    
+
 
     if game_started:
         screen.blit(Second_background, (0,0))
@@ -132,7 +148,13 @@ while running:
         if current_level.is_completed:
             advance_level()
 
-            
+    elif game_over_state:
+        screen.blit(Game_Over, (0,0))
+        #text to press any key
+        font = pygame.font.Font('ka1.ttf', 24)
+        instruction_text = font.render("Press any key to continue", True, (255, 255, 255))
+        text_rect = instruction_text.get_rect(center=(WIDTH//2, HEIGHT-25))
+        screen.blit(instruction_text, text_rect)        
         
 
     elif is_showing_help:
@@ -141,6 +163,8 @@ while running:
             screen.blit(how_to_play_X_background, (0,0))    
             if event.type == pygame.MOUSEBUTTONUP:
                 is_showing_help = False
+
+    
 
     else:
         if is_hovering_play:
@@ -166,6 +190,7 @@ while running:
             screen.blit(First_background, (0, 0))
     
 
+    
     
 
     # flip() the display to put your work on screen

@@ -1,7 +1,7 @@
 import pygame
 from shape import *
 from util_params import *
-
+from levelandtimer import *
 #class for each level
 
 class Level:
@@ -78,6 +78,7 @@ class Level:
                     piece.is_placed = True
                 print("Level Complete")
                 
+                
         return self.is_completed
 
     def draw(self, surface):
@@ -100,11 +101,33 @@ class Level:
 
 def get_level_data(level_index):
     
-    LEVELS = [{"target_image": "LevelOne.png",
+    LEVELS = [
+        #level 1
+            {"target_image": "LevelOne.png",
                "pieces": 
                [{"path": "Square_Shape.png",
                 "initial_pos_offset": (0, 0),
-                "correct_grid": [(5, 5)]}]}
+                "correct_grid": [(5, 5)]}]},
+        #level 2
+            {"target_image": "LevelTwo.png",
+               "pieces": 
+               [{"path": "Small_L_Shape.png",
+                "initial_pos_offset": (0, 0),
+                "correct_grid": [(4, 3)]},
+                {"path": "T_Shape.png",
+                "initial_pos_offset": (1, 0),
+                "correct_grid": [(6, 3)]},
+                {"path": "L_Shape.png",
+                "initial_pos_offset": (0, 1),
+                "correct_grid": [(4, 5)]},
+                {"path": "S_Shape.png",
+                "initial_pos_offset": (1, 1),
+                "correct_grid": [(5, 5)]},
+                {"path": "I_Shape.png",
+                "initial_pos_offset": (0, 2),
+                "correct_grid": [(7, 6)]}
+            
+                ]}
                 ]
     
     if 0 <= level_index < len(LEVELS):
