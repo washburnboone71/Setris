@@ -89,7 +89,7 @@ current_level = load_level(current_level_index)
 FULLSCREEN = pygame.Rect(0, 0, WIDTH, HEIGHT)
 TRIGGER_AREA_PLAY = pygame.Rect(0, 475, WIDTH // 4, HEIGHT // 4)
 TRIGGER_AREA_QUESTION = pygame.Rect(800, 475, 150, HEIGHT // 4)
-TRIGGER_AREA_QUESTION_X = pygame.Rect(800, 0, 100, 100)
+TRIGGER_AREA_QUESTION_X = pygame.Rect(WIDTH-250, 0, 250, 250)
 
 level_timer_display = Levelcounter('ka1.ttf', 32, (255,255,255), (915, 625), (740,625))
 

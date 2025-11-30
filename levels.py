@@ -103,58 +103,75 @@ class Level:
 def get_level_data(level_index):
     
     LEVELS = [
-        #level 1
+        #Level ONE
             {"target_image": "LevelOne.png",
                "pieces": 
                [{"path": "Square_Shape.png",
                 "initial_pos_offset": (0, 0),
                 "correct_grid": [(5, 5)]}]},
-        #level 2
+        #LEVEL TWO
             {"target_image": "LevelTwo.png",
                "pieces": 
                [{"path": "Small_L_Shape.png",
                 "initial_pos_offset": (0, 0),
-                "correct_grid": [(4, 3)]},
+                "correct_grid": [(4, 3), (6, 7), (5, 6)]},
                 {"path": "T_Shape.png",
                 "initial_pos_offset": (1, 0),
                 "correct_grid": [(6, 3)]},
                 {"path": "L_Shape.png",
                 "initial_pos_offset": (0, 1),
-                "correct_grid": [(4, 5)]},
+                "correct_grid": [(4, 5), (6, 6)]},
                 {"path": "S_Shape.png",
                 "initial_pos_offset": (1, 1),
-                "correct_grid": [(5, 5)]},
+                "correct_grid": [(5, 5), (4, 3)]},
                 {"path": "I_Shape.png",
                 "initial_pos_offset": (0, 2),
-                "correct_grid": [(7, 6)]}]},
-        #level 3
+                "correct_grid": [(7, 6), (5, 6), (4, 5)]}]},
+            #LEVEL THREE
             {"target_image": "Level_Three.png",
                "pieces": 
                [{"path": "L_Shape.png",
                 "initial_pos_offset": (0, 0),
-                "correct_grid": [(2, 2)]},
+                "correct_grid": [(2, 2), (4, 2)]},
                 {"path": "L_Shape.png",
                 "initial_pos_offset": (1, 0),
-                "correct_grid": [(4, 2)]},
+                "correct_grid": [(4, 2), (2, 2)]},
                 {"path": "Small_L_Shape.png",
                 "initial_pos_offset": (0, 1),
                 "correct_grid": [(3, 2)]},
                 {"path": "Square_Shape.png",
                 "initial_pos_offset": (1, 1),
-                "correct_grid": [(2, 5)]},
+                "correct_grid": [(2, 5), (5, 6)]},
                 {"path": "T_Shape.png",
                 "initial_pos_offset": (0, 2),
                 "correct_grid": [(4, 4)]},
                 {"path": "Square_Shape.png",
                 "initial_pos_offset": (1, 2),
-                "correct_grid": [(5, 6)]}]}
-            
-
-
-
-
-                ]
+                "correct_grid": [(5, 6), (2, 5)]}]},
+            #LEVEL FOUR
+                {"target_image": "Level_Four.png",
+               "pieces": 
+               [{"path": "L_Shape.png",
+                "initial_pos_offset": (0, 0),
+                "correct_grid": [(5, 7)]},
+                {"path": "Small_L_Shape.png",
+                "initial_pos_offset": (1, 0),
+                "correct_grid": [(3, 3), (4, 4)]},
+                {"path": "Small_L_Shape.png",
+                "initial_pos_offset": (0, 1),
+                "correct_grid": [(3, 3), (4, 4)]},
+                {"path": "I_Shape.png",
+                "initial_pos_offset": (1, 1),
+                "correct_grid": [(3, 7), (8, 6)]},
+                {"path": "I_Shape.png",
+                "initial_pos_offset": (0, 2),
+                "correct_grid": [(3, 7), (8, 6)]},
+                {"path": "S_Shape.png",
+                "initial_pos_offset": (1, 2),
+                "correct_grid": [(5, 5)]}]}
+            ]
     
+
     if 0 <= level_index < len(LEVELS):
         return LEVELS[level_index]
     else:
