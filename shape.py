@@ -48,7 +48,7 @@ class IndexShape:
         self.update_image()
         self.rect = self.image.get_rect(center=center)
 
-    #drag and dropping pieces
+    #drag dropping and rotating pieces
     def handle_event(self, event):      
         #if mouse is down 
         if event.type == pygame.MOUSEBUTTONDOWN:
@@ -124,7 +124,7 @@ class IndexShape:
 
 
     #checks if piece is on its correct cordinate
-    def is_correctly_placed(self):
+    def correctly_placed(self):
         current_coords = self.get_current_grid_coords()
         if current_coords:
             return current_coords in self.correct_grid_coords

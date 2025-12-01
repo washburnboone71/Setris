@@ -1,6 +1,8 @@
+#entire screen
 WIDTH = 1000
 HEIGHT = 700
 
+#info of main background screen
 GRID_SPACING = 56
 MAIN_AREA_X = 15
 MAIN_AREA_Y = 15

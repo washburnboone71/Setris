@@ -24,11 +24,11 @@ class Level:
             
         
         #targets center is in the middle of the main area
-        # have to make sure all pieces pngs center is in the center
+        #have to make sure all pieces pngs center is in the center
         self.target_rect = self.target_image.get_rect(center=(main_area_center_x, main_area_center_y))
         
 
-        # --- Pieces Setup ---
+        #piece setup
         self.pieces = []
         # index pieces pos in index area
         initial_x = INDEX_AREA_X + 20 
@@ -70,7 +70,7 @@ class Level:
         #checks in level is finished
         if not self.is_completed:
             #goes to true if all are true inside  all()
-            all_correct = all(piece.is_correctly_placed() for piece in self.pieces)
+            all_correct = all(piece.correctly_placed() for piece in self.pieces)
             
             if all_correct:
                 #finishes level and print

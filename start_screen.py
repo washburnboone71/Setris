@@ -26,7 +26,7 @@ def start_screen_play_selected():
     background = pygame.Surface((WIDTH,HEIGHT))
     background.fill((63,63,63))
 
-    # get start screen image and define it
+    #get start screen image and define it
     start_screen_location = 'start_screen_play_selected.png'
     start_screen_image = pygame.image.load(start_screen_location).convert_alpha()
 
@@ -43,7 +43,7 @@ def start_screen_question_selected():
     background = pygame.Surface((WIDTH,HEIGHT))
     background.fill((63,63,63))
 
-    # get start screen image and define it
+    #get start screen image and define it
     start_screen_location = 'start_screen_question_selected.png'
     start_screen_image = pygame.image.load(start_screen_location).convert_alpha()
 
