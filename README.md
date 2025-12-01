@@ -8,7 +8,7 @@
 =======
 ![screenshot](Screenshot1.png)
 ![screenshot](Screenshot2.png)
-![screenshot](Screenshot3.png)
+
 >>>>>>> 2bb46eceea751cb264d0a8b8523b1084ae9deae0
 
 ## Directions
